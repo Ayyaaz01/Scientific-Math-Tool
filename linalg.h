@@ -15,5 +15,6 @@ typedef struct {
 void linalg_add_n(void);
 void linalg_sub_n(void);
 void linalg_multiply_n(void);
+void linalg_transpose(void);
 
 #endif

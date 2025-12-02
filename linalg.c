@@ -12,6 +12,7 @@ static void zero_matrix(Matrix *m);
 static void matrix_add_inplace(Matrix *dest, const Matrix *src);
 static void matrix_sub_inplace(Matrix *dest, const Matrix *src);
 static void multiply_matrices(const Matrix *a, const Matrix *b, Matrix *result);
+static void transpose_matrix(const Matrix *m, Matrix *t);
 
 void linalg_add_n(void) {
   int count =
@@ -94,6 +95,18 @@ void linalg_multiply_n(void) {
 
   printf("\nResult of multiplying %d matrices:\n", count);
   print_matrix(&result);
+}
+
+void linalg_transpose(void) {
+    Matrix input, output;
+    
+    printf("\nTranpose a Matrix:\n");
+    read_matrix_with_dims(&input, "Enter matrix to transpose:");
+
+    transpose_matrix(&input, &output);
+    
+    printf("\nTransposed Matrix (%d x %d):\n", output.rows, output.cols);
+    print_matrix(&output);
 }
 
 //--------------------- Helper Functions -----------------------//
@@ -193,4 +206,16 @@ static void multiply_matrices(const Matrix *a, const Matrix *b,
       }
     }
   }
+}
+
+static void transpose_matrix(const Matrix *m, Matrix *t) {
+    // Dimensions are flipped.
+    t->rows = m->cols;
+    t->cols = m->rows;
+
+    for (int i = 0; i < m->rows; i++) {
+        for (int j = 0; j < m->cols; j++) {
+            t->data[j][i] = m->data[i][j];
+        }
+    }
 }
