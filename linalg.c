@@ -4,7 +4,7 @@
 
 static void input_matrix(Matrix *m);
 static void print_matrix(const Matrix *m);
-static void ask_matrix_dimensons(Matrix *m, const char *label);
+static void ask_matrix_dimensions(Matrix *m, const char *label);
 static void read_matrix_fixed_size(Matrix *m, const char *title);
 static void read_matrix_with_dims(Matrix *m, const char *title);   
 
@@ -20,7 +20,7 @@ void linalg_add_n(void) {
   Matrix sum, input;
 
   // Choose size for all matrices
-  ask_matrix_dimensons(&sum, "Enter a size for all matrices to add:");
+  ask_matrix_dimensions(&sum, "Enter a size for all matrices to add:");
   zero_matrix(&sum); // initialise to zeroes first
 
   // Read matrices and accumulate
@@ -48,7 +48,7 @@ void linalg_sub_n(void) {
       get_int_in_range("How many matrices do you want to subtract? (2-10) ", 2, MAX_MATRICES);
 
   Matrix sum, input;
-  ask_matrix_dimensons(&sum, "Enter size for all matrices to subtract:");
+  ask_matrix_dimensions(&sum, "Enter size for all matrices to subtract:");
   read_matrix_fixed_size(&sum, "Matrix 1 (starting matrix)");  // Read first matrix into sum
 
   // Subtract the remaining matrices from sum
@@ -105,7 +105,7 @@ void linalg_transpose(void) {
 
     printf("\nOriginal Matrix (%d x %d):\n", input.rows, input.cols);
     print_matrix(&input);
-    
+
     transpose_matrix(&input, &output);
 
     printf("\nTransposed Matrix (%d x %d):\n", output.rows, output.cols);
@@ -146,7 +146,7 @@ static void print_matrix(const Matrix *m) {
 
 // Ask user for rows & cols for a matrix.
 // e.g. label = "Enter size for matrices: "
-static void ask_matrix_dimensons(Matrix *m, const char *label) {
+static void ask_matrix_dimensions(Matrix *m, const char *label) {
   if (label && label[0] != '\0') {
     printf("%s\n", label);
   }
@@ -176,7 +176,7 @@ static void read_matrix_with_dims(Matrix *m, const char *title) {
   if (title && title[0] != '\0') {
     printf("\n%s\n", title);
   }
-  ask_matrix_dimensons(m, NULL);
+  ask_matrix_dimensions(m, NULL);
   input_matrix(m);
 }
 
